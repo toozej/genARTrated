@@ -16,6 +16,6 @@ Execute `samila/main.py` to generate art manually (without using Docker) using t
 ### Docker
 Note the following build and run commands are executed "automatically" as part of `make build` and `make run` respectively
 
-Build: `docker build -t toozej/genartrated:samila .`
-Run: `docker run --rm -v $(pwd)/samila/out:/out toozej/genartrated:samila`
-Interactive: `docker run --rm -it --entrypoint=python -v $(pwd)/samila/out:/out toozej/genartrated:samila`
+- Build: `docker build -t toozej/genartrated:samila .`
+- Run: `docker run --rm -v $(pwd)/samila/out:/out toozej/genartrated:samila`
+- Interactive: `docker run --rm -it --entrypoint=python -v $(pwd)/samila/out:/out toozej/genartrated:samila`

@@ -1,4 +1,8 @@
 # genARTrated
+[![GitHub Container Registry](https://img.shields.io/static/v1.svg?&style=for-the-badge&label=toozej&message=GitHub%20Container%20Registry&logo=github)](https://github.com/users/toozej/packages/container/package/genartrated)
+[![Quay.io](https://img.shields.io/static/v1.svg?style=for-the-badge&label=toozej&message=Quay.io)](https://quay.io/repository/toozej/genartrated)
+[![Docker Pulls](https://img.shields.io/docker/pulls/toozej/genartrated.svg?style=for-the-badge&label=DockerHub&logo=docker)](https://hub.docker.com/r/toozej/genartrated)
+
 A home for generated art
 
 Run all projects with `make all`

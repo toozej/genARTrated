@@ -17,7 +17,7 @@ jobs:
       matrix:
         include:
           - context: samila/
-            tags: "toozej/genartrated:samila"
+            tags: ["toozej/genartrated:samila", "ghcr.io/toozej/genartrated:samila"]
           # - context: service-b
           #  tags: "toozej/genartrated:service-b"
     steps:

@@ -1,0 +1,52 @@
+---
+name: CI
+'on':
+  pull_request:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - github_actions
+  schedule:
+    - cron: "0 1 * * 1"
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - context: samila/
+            tags: "toozej/genartrated:samila"
+          # - context: service-b
+          #  tags: "toozej/genartrated:service-b"
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        # https://docs.docker.com/docker-hub/access-tokens/
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        # https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GH_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: ${{ matrix.context }}
+          tags: ${{ matrix.tags }}
+          platforms: linux/amd64
+          push: true

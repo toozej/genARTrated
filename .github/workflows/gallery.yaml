@@ -1,0 +1,24 @@
+---
+name: gallery
+'on':
+  pull_request:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - init-gallery
+
+defaults:
+  run:
+    working-directory: gallery
+
+jobs:
+  gallery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: python scripts/main.py

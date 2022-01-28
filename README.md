@@ -1,8 +1,4 @@
 # genARTrated
-[![GitHub Container Registry](https://img.shields.io/static/v1.svg?&style=for-the-badge&label=toozej&message=GitHub%20Container%20Registry&logo=github)](https://github.com/users/toozej/packages/container/package/genartrated)
-[![Quay.io](https://img.shields.io/static/v1.svg?style=for-the-badge&label=toozej&message=Quay.io)](https://quay.io/repository/toozej/genartrated)
-[![Docker Pulls](https://img.shields.io/docker/pulls/toozej/genartrated.svg?style=for-the-badge&label=DockerHub&logo=docker)](https://hub.docker.com/r/toozej/genartrated)
-
 A home for generated art
 
 Run all projects with `make all`
@@ -23,3 +19,8 @@ Note the following build and run commands are executed "automatically" as part o
 - Build: `docker build -t toozej/genartrated:samila .`
 - Run: `docker run --rm -v $(pwd)/samila/out:/out toozej/genartrated:samila`
 - Interactive: `docker run --rm -it --entrypoint=python -v $(pwd)/samila/out:/out toozej/genartrated:samila`
+
+## Gallery
+- Uses <https://github.com/soyaine/horcrux> to generate a GitHub Pages-compatible image gallery for displaying generated art
+- Uses <https://github.com/madduci/docker-github-pages> to create Dockerized version of gallery for local viewing and iteration
+- See [the gallery README](./gallery/README.md) for more information

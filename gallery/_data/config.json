@@ -1,0 +1,67 @@
+[
+  {
+    "name": "samila",
+    "type": "photos",
+    "parents": [
+      "samila"
+    ],
+    "list": [
+      {
+        "type": "photo",
+        "width": 5000,
+        "height": 5000,
+        "path": "./photos/samila/regeneration_20211114-234004.png",
+        "min_path": "./photos/samila/regeneration_20211114-234004.min.png"
+      },
+      {
+        "type": "photo",
+        "width": 5000,
+        "height": 5000,
+        "path": "./photos/samila/projection_20211113-201656.png",
+        "min_path": "./photos/samila/projection_20211113-201656.min.png"
+      },
+      {
+        "type": "photo",
+        "width": 5000,
+        "height": 5000,
+        "path": "./photos/samila/projection.png",
+        "min_path": "./photos/samila/projection.min.png"
+      },
+      {
+        "type": "photo",
+        "width": 5000,
+        "height": 5000,
+        "path": "./photos/samila/color_20211221-212416.png",
+        "min_path": "./photos/samila/color_20211221-212416.min.png"
+      },
+      {
+        "type": "photo",
+        "width": 5000,
+        "height": 5000,
+        "path": "./photos/samila/color_20211113-201656.png",
+        "min_path": "./photos/samila/color_20211113-201656.min.png"
+      },
+      {
+        "type": "photo",
+        "width": 5000,
+        "height": 5000,
+        "path": "./photos/samila/basic_20211221-212416.png",
+        "min_path": "./photos/samila/basic_20211221-212416.min.png"
+      },
+      {
+        "type": "photo",
+        "width": 5000,
+        "height": 5000,
+        "path": "./photos/samila/basic_20211114-234004.png",
+        "min_path": "./photos/samila/basic_20211114-234004.min.png"
+      },
+      {
+        "type": "photo",
+        "width": 5000,
+        "height": 5000,
+        "path": "./photos/samila/basic_20211113-194332.png",
+        "min_path": "./photos/samila/basic_20211113-194332.min.png"
+      }
+    ]
+  }
+]

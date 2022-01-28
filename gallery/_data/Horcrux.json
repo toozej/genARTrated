@@ -1,0 +1,23 @@
+{
+  "name": "Horcrux",
+  "type": "album",
+  "root": 0,
+  "parents": [],
+  "items": {
+    "order": [
+      "samila"
+    ],
+    "dict": {
+      "samila": {
+        "name": "samila",
+        "type": "album",
+        "root": 1,
+        "parents": [
+          "samila"
+        ],
+        "path": "./_data/albums/samila.json",
+        "no_sub_album": true
+      }
+    }
+  }
+}

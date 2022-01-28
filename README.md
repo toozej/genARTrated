@@ -23,4 +23,4 @@ Note the following build and run commands are executed "automatically" as part o
 ## Gallery
 - Uses <https://github.com/soyaine/horcrux> to generate a GitHub Pages-compatible image gallery for displaying generated art
 - Uses <https://github.com/madduci/docker-github-pages> to create Dockerized version of gallery for local viewing and iteration
-	- Makefile `make gallery-local` grabs the latest Dockerfile from this repo and stores it under `gallery/`
+- See [the gallery README](./gallery/README.md) for more information

@@ -21,6 +21,7 @@ Note the following build and run commands are executed "automatically" as part o
 - Interactive: `docker run --rm -it --entrypoint=python -v $(pwd)/samila/out:/out toozej/genartrated:samila`
 
 ## Gallery
+- (stored in genARTrated repo as `docs/` since GitHub Pages will only publish from root or `docs/` directories :()
 - Uses <https://github.com/soyaine/horcrux> to generate a GitHub Pages-compatible image gallery for displaying generated art
 - Uses <https://github.com/madduci/docker-github-pages> to create Dockerized version of gallery for local viewing and iteration
-- See [the gallery README](./gallery/README.md) for more information
+- See [the gallery README](./docs/README.md) for more information

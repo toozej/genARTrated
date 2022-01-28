@@ -1,4 +1,4 @@
-.PHONY: all build run gallery-compile gallery-view copy gallery load clean $(PROJECTS)
+.PHONY: all build run copy gallery-compile gallery-view gallery load clean $(PROJECTS)
 
 # All projects have a Dockerfile, so create a list of project dirs based on dirs containing a Dockerfile
 # idea from https://philpep.org/blog/a-makefile-for-your-dockerfiles/
@@ -20,12 +20,12 @@ copy:
 	cp -r $(CURDIR)/$(strip $(PROJECTS))/out/* $(CURDIR)/gallery/photos/$(strip $(PROJECTS))/
 
 gallery-compile:
-	docker build -f $(CURDIR)/gallery/Dockerfile-compile -t toozej/genartrated:gallery-compile gallery/
-	docker run --rm --name gallery-compile -v $(CURDIR)/gallery:/app toozej/genartrated:gallery-compile
+	docker build -f $(CURDIR)/docs/Dockerfile-compile -t toozej/genartrated:gallery-compile docs/
+	docker run --rm --name gallery-compile -v $(CURDIR)/docs:/app toozej/genartrated:gallery-compile
 
 gallery-view:
-	docker build -f $(CURDIR)/gallery/Dockerfile-view -t toozej/genartrated:gallery-view gallery/
-	docker run --rm --name gallery-view -v $(CURDIR)/gallery:/site -p 8080:4000 toozej/genartrated:gallery-view serve --watch --force_polling --host 0.0.0.0
+	docker build -f $(CURDIR)/docs/Dockerfile-view -t toozej/genartrated:gallery-view docs/
+	docker run --rm --name gallery-view -v $(CURDIR)/docs:/site -p 8080:4000 toozej/genartrated:gallery-view serve --watch --force_polling --host 0.0.0.0
 
 gallery: $(PROJECTS) gallery-compile gallery-view
 

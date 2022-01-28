@@ -10,7 +10,7 @@ name: gallery
 
 defaults:
   run:
-    working-directory: gallery
+    working-directory: docs
 
 jobs:
   gallery:

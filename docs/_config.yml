@@ -34,3 +34,6 @@ process:
 sass:
   sass_dir: _sass
   style: compressed
+
+exclude: ['Dockerfile-compile', 'Dockerfile-view', 'CNAME', \
+  'LICENSE', 'README.md', 'requirements.txt', '.gitignore']

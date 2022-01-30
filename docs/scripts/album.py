@@ -8,7 +8,7 @@ class Album():
         self.items_order = []
         self.items_dict = {}
         self.root = root or 0
-    
+
     def sort_dirs(self, dirs, type):
         def _getmtime(entry):
             order_map = {
@@ -18,14 +18,14 @@ class Album():
             }
             order_by = conf.ORDER_ALBUMS_BY_LAST_DO if type == 'album' else conf.ORDER_PHOTOS_BY_LAST_DO
             return getattr(entry.stat(), order_map[order_by])
-        
+
         if type == 'album':
             sort_by = _getmtime if conf.SORT_ALBUMS_BY_TIME else lambda x:x.name
             return sorted(dirs, key=sort_by, reverse=conf.REVERSE_ALBUMS_ORDER)
         if type == 'photo':
             sort_by = _getmtime if conf.SORT_PHOTOS_BY_TIME else lambda x:x.name
             return sorted(dirs, key=sort_by, reverse=conf.REVERSE_PHOTOS_ORDER)
-    
+
     def format(self):
         # dirs = os.listdir(self.path)
         dirs = self.path.iterdir()
@@ -42,13 +42,13 @@ class Album():
         }
 
         print(f'Processing the album {self.name}')
-        
+
         for i, path in enumerate(dirs):
             if path.is_dir():
                 album_list.append(path)
             elif str(path.suffix).endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif')):
                 photo_list.append(path)
-                
+
         photo_list = self.sort_dirs(photo_list, 'photo')
         album_list = self.sort_dirs(album_list, 'album')
 
@@ -58,13 +58,13 @@ class Album():
             if photo_conf:
                 self.items_order.append(path.name)
                 self.items_dict[path.name] = photo_conf
-        
+
         for path in album_list:
             sub_album = Album(path, path.name, self.root + 1)
             self.items_order.append(path.name)
             self.items_dict[path.name] = sub_album.format()
             has_child_album = True
-        
+
         child_items = {
             'order': self.items_order,
             'dict': self.items_dict

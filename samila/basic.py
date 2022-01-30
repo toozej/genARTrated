@@ -12,6 +12,6 @@ def basic(timestamp):
     g.plot()
     g.save_image(file_adr=f"/out/basic_{timestamp}.png", depth=5)
     g.save_data(file_adr=f"/out/basic_{timestamp}.json")
-    
+
     # return seed for use in other functions
     return g.seed

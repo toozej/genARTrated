@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM ruby:2.7-alpine
 
 LABEL maintainer="Michele Adduci <adduci.michele@gmail.com>"
 
@@ -18,7 +18,6 @@ RUN apk update && \
     bison \
     ca-certificates \
     tzdata \
-    ruby \
     ruby-rdoc \
     ruby-irb \
     ruby-bundler \

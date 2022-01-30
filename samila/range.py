@@ -13,6 +13,6 @@ def range(timestamp):
     g.plot()
     g.save_image(file_adr=f"/out/range_{timestamp}.png", depth=5)
     g.save_data(file_adr=f"/out/range_{timestamp}.json")
-    
+
     # return seed for use in other functions
     return g.seed

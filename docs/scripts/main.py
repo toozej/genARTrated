@@ -16,7 +16,7 @@ class bcolors:
 class log():
     def info(text):
         print(bcolors.HEADER + text + bcolors.ENDC)
-    
+
     def ok(text):
         print(bcolors.OKBLUE + text + bcolors.ENDC)
 

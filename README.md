@@ -7,21 +7,31 @@ Run all projects with `make all`
 - Docker
 - GNU Make
 
-## Samila
-Art in this directory is generated using <https://github.com/sepandhaghighi/samila>
-
-### Manual
-Execute `samila/main.py` to generate art manually (without using Docker) using the various Samila options
+## Execution
+### Make
+- Make all projects: `make all`
+- Make a specific project $proj: `make project $proj`
+- Make the web gallery: `make gallery`
 
 ### Docker
 Note the following build and run commands are executed "automatically" as part of `make build` and `make run` respectively
 
-- Build: `docker build -t toozej/genartrated:samila .`
-- Run: `docker run --rm -v $(pwd)/samila/out:/out toozej/genartrated:samila`
-- Interactive: `docker run --rm -it --entrypoint=python -v $(pwd)/samila/out:/out toozej/genartrated:samila`
+For a specific project $proj:
+- Build: `docker build -t toozej/genartrated:$proj .`
+- Run: `docker run --rm -v $(pwd)/$proj/out:/out toozej/genartrated:$proj`
+- Interactive:
+	- for Python-based projects: `docker run --rm -it --entrypoint=python -v $(pwd)/$proj/out:/out toozej/genartrated:$proj`
+
+### Manual
+For Python-based projects, execute `$proj/main.py` to generate art manually (without using Docker). Be sure to create a virtualenv
+and install the necessary requirements before running!
+
+## Projects
+### Samila
+Art in this directory is generated using <https://github.com/sepandhaghighi/samila>
 
 ## Gallery
-- (stored in genARTrated repo as `docs/` since GitHub Pages will only publish from root or `docs/` directories :()
+- Stored in genARTrated repo as `docs/` since GitHub Pages will only publish from root or `docs/` directories :(
 - Uses <https://github.com/soyaine/horcrux> to generate a GitHub Pages-compatible image gallery for displaying generated art
 - Uses <https://github.com/madduci/docker-github-pages> to create Dockerized version of gallery for local viewing and iteration
 - See [the gallery README](./docs/README.md) for more information

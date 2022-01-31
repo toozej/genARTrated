@@ -1,10 +1,11 @@
+from datetime import datetime
+
 from basic import basic
 from projection import projection
 from range import range
 from color import color
 from regeneration import regeneration
 
-from datetime import datetime
 # get current time
 now = datetime.now()
 # format timestamp for use in filenames

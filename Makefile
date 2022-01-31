@@ -32,10 +32,14 @@ project-build:
 project-run:
 	docker run --rm --name $(strip $(PROJECT_ARGS)) -v $(CURDIR)/$(strip $(PROJECT_ARGS))/out:/out toozej/genartrated:$(strip $(PROJECT_ARGS))
 
+project-copy:
+	mkdir -p $(CURDIR)/docs/photos/$(strip $(PROJECT_ARGS))
+	cp -r $(CURDIR)/$(strip $(PROJECT_ARGS))/out/* $(CURDIR)/docs/photos/$(strip $(PROJECT_ARGS))/
+
 project: project-build project-run
 
 copy:
-	cp -r $(CURDIR)/$(strip $(PROJECTS))/out/* $(CURDIR)/gallery/photos/$(strip $(PROJECTS))/
+	cp -r $(CURDIR)/$(strip $(PROJECTS))/out/* $(CURDIR)/docs/photos/$(strip $(PROJECTS))/
 
 gallery-compile:
 	docker build -f $(CURDIR)/docs/Dockerfile-compile -t toozej/genartrated:gallery-compile docs/

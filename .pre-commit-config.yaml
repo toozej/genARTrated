@@ -1,7 +1,10 @@
 ---
+default_language_version: {python: python3}
+minimum_pre_commit_version: "1.15"
+
 repos:
   - repo: git://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
+    rev: v4.1.0
     hooks:
       - id: check-yaml
         name: Check for valid YAML syntax in repo
@@ -22,3 +25,41 @@ repos:
         name: Ensure line-ending is consistent
         description: https://github.com/pre-commit/pre-commit-hooks/blob/master/pre_commit_hooks/mixed_line_ending.py
         files: \.(py|sh|yaml|yml)$
+      - id: check-executables-have-shebangs
+        name: Checks that non-binary executables have a proper shebang
+        description: https://github.com/pre-commit/pre-commit-hooks/blob/master/pre_commit_hooks/check_executables_have_shebangs.py
+        files: \.(py|sh)$
+      - id: check-shebang-scripts-are-executable
+        name: Checks that scripts with shebangs are executable.
+        description: https://github.com/pre-commit/pre-commit-hooks/blob/master/pre_commit_hooks/check_shebang_scripts_are_executable.py
+        files: \.(py|sh)$
+      - id: check-json
+        name: Attempts to load all json files to verify syntax.
+        description: https://github.com/pre-commit/pre-commit-hooks/blob/master/pre_commit_hooks/check_json.py
+        files: \.(json)$
+      - id: check-toml
+        name: Attempts to load all toml files to verify syntax.
+        description: https://github.com/pre-commit/pre-commit-hooks/blob/master/pre_commit_hooks/check_toml.py
+        files: \.(toml)$
+      - id: check-yaml
+        name: Attempts to load all yaml files to verify syntax.
+        description: https://github.com/pre-commit/pre-commit-hooks/blob/master/pre_commit_hooks/check_yaml.py
+        files: \.(yaml)$
+
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply
+      - id: check-useless-excludes
+
+  - repo: https://github.com/psf/black
+    rev: 22.1.0
+    hooks:
+      - id: black
+        exclude: fractals/anovik/fractals.py
+
+  - repo: https://github.com/klen/pylama
+    rev: 8.3.7
+    hooks:
+      - id: pylama
+        args: ['-i', 'C901,E203,E501,E722']
+        exclude: fractals/anovik/fractals.py

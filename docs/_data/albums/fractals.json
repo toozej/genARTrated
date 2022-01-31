@@ -1,0 +1,22 @@
+{
+  "order": [
+    "newton_20220131-051403.png",
+    "burningship_20220131-051403.png"
+  ],
+  "dict": {
+    "newton_20220131-051403.png": {
+      "type": "photo",
+      "width": 3000,
+      "height": 3000,
+      "path": "./photos/fractals/newton_20220131-051403.png",
+      "min_path": "./photos/fractals/newton_20220131-051403.min.png"
+    },
+    "burningship_20220131-051403.png": {
+      "type": "photo",
+      "width": 3000,
+      "height": 3000,
+      "path": "./photos/fractals/burningship_20220131-051403.png",
+      "min_path": "./photos/fractals/burningship_20220131-051403.min.png"
+    }
+  }
+}

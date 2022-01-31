@@ -5,9 +5,20 @@
   "parents": [],
   "items": {
     "order": [
+      "fractals",
       "samila"
     ],
     "dict": {
+      "fractals": {
+        "name": "fractals",
+        "type": "album",
+        "root": 1,
+        "parents": [
+          "fractals"
+        ],
+        "path": "./_data/albums/fractals.json",
+        "no_sub_album": true
+      },
       "samila": {
         "name": "samila",
         "type": "album",

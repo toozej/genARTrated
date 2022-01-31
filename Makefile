@@ -1,4 +1,4 @@
-.PHONY: all build run project-build project-run project copy gallery-compile gallery-view gallery load clean $(PROJECTS)
+.PHONY: all build run project-build project-run project-copy project copy gallery-compile gallery-view gallery load clean $(PROJECTS)
 
 # All projects have a Dockerfile, so create a list of project dirs based on dirs containing a Dockerfile
 # idea from https://philpep.org/blog/a-makefile-for-your-dockerfiles/
@@ -35,11 +35,14 @@ project-run:
 project-copy:
 	mkdir -p $(CURDIR)/docs/photos/$(strip $(PROJECT_ARGS))
 	cp -r $(CURDIR)/$(strip $(PROJECT_ARGS))/out/* $(CURDIR)/docs/photos/$(strip $(PROJECT_ARGS))/
+	chmod -R ugo+rw $(CURDIR)/docs/photos/$(strip $(PROJECT_ARGS))/
 
-project: project-build project-run
+project: project-build project-run project-copy
 
 copy:
+	mkdir -p $(CURDIR)/docs/photos/$(strip $(PROJECTS))
 	cp -r $(CURDIR)/$(strip $(PROJECTS))/out/* $(CURDIR)/docs/photos/$(strip $(PROJECTS))/
+	chmod -R ugo+rw $(CURDIR)/docs/photos/$(strip $(PROJECTS))/
 
 gallery-compile:
 	docker build -f $(CURDIR)/docs/Dockerfile-compile -t toozej/genartrated:gallery-compile docs/

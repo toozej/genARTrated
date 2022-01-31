@@ -1,5 +1,28 @@
 [
   {
+    "name": "fractals",
+    "type": "photos",
+    "parents": [
+      "fractals"
+    ],
+    "list": [
+      {
+        "type": "photo",
+        "width": 3000,
+        "height": 3000,
+        "path": "./photos/fractals/newton_20220131-051403.png",
+        "min_path": "./photos/fractals/newton_20220131-051403.min.png"
+      },
+      {
+        "type": "photo",
+        "width": 3000,
+        "height": 3000,
+        "path": "./photos/fractals/burningship_20220131-051403.png",
+        "min_path": "./photos/fractals/burningship_20220131-051403.min.png"
+      }
+    ]
+  },
+  {
     "name": "samila",
     "type": "photos",
     "parents": [

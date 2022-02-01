@@ -10,14 +10,41 @@ timestamp = now.strftime("%Y%m%d-%H%M%S")
 # Newton fractal algorithm
 # <https://en.wikipedia.org/wiki/Newton_fractal>
 newton_filename = f"/out/newton_{timestamp}.png"
-subprocess.run(["anovik/fractals.py", "--algorithm", "newton", "--colormap",
-                "RdYlBu", "--output", newton_filename],
-               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+subprocess.run(
+    [
+        "anovik/fractals.py",
+        "--algorithm",
+        "newton",
+        "--colormap",
+        "RdYlBu",
+        "--output",
+        newton_filename,
+    ],
+    stdout=subprocess.DEVNULL,
+    stderr=subprocess.DEVNULL,
+)
 
 # Burning Ship fractal algorithm
 # <https://en.wikipedia.org/wiki/Burning_Ship_fractal>
 burningship_filename = f"/out/burningship_{timestamp}.png"
-subprocess.run(["anovik/fractals.py", "--algorithm", "burningShip", "--colormap",
-                "hot", "--xmin", "-2", "--xmax", "2", "--ymin", "-2", "--ymax",
-                "2", "--output", burningship_filename],
-               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+subprocess.run(
+    [
+        "anovik/fractals.py",
+        "--algorithm",
+        "burningShip",
+        "--colormap",
+        "hot",
+        "--xmin",
+        "-2",
+        "--xmax",
+        "2",
+        "--ymin",
+        "-2",
+        "--ymax",
+        "2",
+        "--output",
+        burningship_filename,
+    ],
+    stdout=subprocess.DEVNULL,
+    stderr=subprocess.DEVNULL,
+)

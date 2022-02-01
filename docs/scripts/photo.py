@@ -2,20 +2,20 @@ import conf
 from PIL import Image, ImageDraw, ImageFont
 
 
-class Photo():
+class Photo:
     def __init__(self, path):
         self.path = path
-        self.min_path = ''
-        self.pil_image = Image.open(self.path).convert('RGBA')
+        self.min_path = ""
+        self.pil_image = Image.open(self.path).convert("RGBA")
         self.witdh, self.height = self.pil_image.size
         self.size = self.pil_image.size
 
-        min_file = self.path.stem + '.min' + self.path.suffix
+        min_file = self.path.stem + ".min" + self.path.suffix
         self.min_path = self.path.with_name(min_file)
 
     @property
     def is_min(self):
-        return self.path.match('*.min.*')
+        return self.path.match("*.min.*")
 
     @property
     def has_min(self):
@@ -32,7 +32,7 @@ class Photo():
 
             # resize
             ratio = float(conf.MIN_WIDTH) / self.size[0]
-            new_image_size = tuple([int(x*ratio) for x in self.size])
+            new_image_size = tuple([int(x * ratio) for x in self.size])
 
             if conf.SIGN_THUMBNAIL:
                 if not conf.SIGN_ORIGINAL:
@@ -48,24 +48,24 @@ class Photo():
 
         # return basic info
         return {
-          "type": 'photo',
-          'width': self.size[0],
-          'height': self.size[1],
-          'path': './' + relative_path,
-          'min_path': './' + str(self.min_path.relative_to(conf.DIR_PATH))
+            "type": "photo",
+            "width": self.size[0],
+            "height": self.size[1],
+            "path": "./" + relative_path,
+            "min_path": "./" + str(self.min_path.relative_to(conf.DIR_PATH)),
         }
 
     def save_image(self, img, path):
         if conf.DEBUG:
             img.show()
         else:
-            img.save(path, 'PNG')
+            img.save(path, "PNG")
 
     def mark_image(self, img, fontsize):
         width, height = img.size
-        font = ImageFont.truetype('./assets/font/' + conf.fontfamily, fontsize)
+        font = ImageFont.truetype("./assets/font/" + conf.fontfamily, fontsize)
         # get the most common color in the image, which should be the background color
-        main_color = max(img.getcolors(img.size[0]*img.size[1]))[1]
+        main_color = max(img.getcolors(img.size[0] * img.size[1]))[1]
         # text color should be the inverse of the main / background color
         text_color = tuple(255 - x for x in main_color[:-1]) + (125,)
 
@@ -75,7 +75,7 @@ class Photo():
         x = (width - t_w) / 2
         y = height - 2 * t_h
 
-        transparent_image = Image.new('RGBA', img.size, (255, 255, 255, 0))
+        transparent_image = Image.new("RGBA", img.size, (255, 255, 255, 0))
         draw = ImageDraw.Draw(transparent_image)
 
         draw.text((x, y), conf.copyright, font=font, fill=text_color)

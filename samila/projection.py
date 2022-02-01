@@ -2,12 +2,12 @@
 # <https://github.com/sepandhaghighi/samila#projection>
 
 import core
-import matplotlib.pyplot as plt
 from samila import GenerativeImage
 from samila import Projection
 
+
 def projection(timestamp):
-    g = GenerativeImage(core.f1,core.f2)
+    g = GenerativeImage(core.f1, core.f2)
 
     g.generate()
     g.plot(projection=Projection.POLAR)

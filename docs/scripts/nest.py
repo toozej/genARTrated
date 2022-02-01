@@ -45,6 +45,8 @@ class Nest:
                 alone_photos = list(filter(lambda i: i["type"] == "photo", album_list))
                 if alone_photos:
                     self.append_album(album=album, photos=alone_photos)
+                for item in album_list:
+                    sub_album = self.nest_album(item)  # noqa
 
     def main(self):
         horcrux = self.read(conf.HORCRUX_PATH)

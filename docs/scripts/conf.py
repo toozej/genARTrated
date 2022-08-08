@@ -55,7 +55,7 @@ def merge_list(list_keep_order, list_new):
 
 def merge_json(path, data):
     try:
-        with open(path, "r") as f:
+        with open(path) as f:
             if f:
                 original_config = json.load(f)
                 if "items" in original_config and "items" in data:
@@ -76,7 +76,7 @@ def write_json(path, data):
         f.write(json.dumps(data, indent=2, separators=(",", ": ")))
 
 
-with open(CONF_YAML_PATH, "r") as config:
+with open(CONF_YAML_PATH) as config:
     site_conf = yaml.load(config, Loader=yaml.FullLoader)
     copyright = "@" + site_conf["copyright"]
 

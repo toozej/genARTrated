@@ -58,8 +58,30 @@ repos:
         exclude: fractals/anovik/fractals.py
 
   - repo: https://github.com/klen/pylama
-    rev: 8.3.8
+    rev: 8.4.1
     hooks:
       - id: pylama
         args: ['-i', 'C901,E203,E501,E722']
         exclude: fractals/anovik/fractals.py
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.4
+    hooks:
+      - id: bandit
+        args: ["-iii", "-lll", "-q"]
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.37.3
+    hooks:
+      - id: pyupgrade
+        args: ["--py310-plus"]
+
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.9.0
+    hooks:
+      - id: python-check-blanket-type-ignore
+      - id: python-check-mock-methods
+      - id: python-no-eval
+      - id: python-use-type-annotations
+      - id: text-unicode-replacement-char
+      - id: python-no-log-warn

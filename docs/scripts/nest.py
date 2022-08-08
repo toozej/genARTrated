@@ -10,7 +10,7 @@ class Nest:
     def read(self, path):
         print("read", conf.DIR_PATH.joinpath(path))
         abs_path = conf.DIR_PATH.joinpath(path)
-        with open(abs_path, "r") as f:
+        with open(abs_path) as f:
             return json.load(f)
 
     def append_album(self, album=None, photos=None):

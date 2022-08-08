@@ -32,7 +32,7 @@ class Photo:
 
             # resize
             ratio = float(conf.MIN_WIDTH) / self.size[0]
-            new_image_size = tuple([int(x * ratio) for x in self.size])
+            new_image_size = tuple(int(x * ratio) for x in self.size)
 
             if conf.SIGN_THUMBNAIL:
                 if not conf.SIGN_ORIGINAL:

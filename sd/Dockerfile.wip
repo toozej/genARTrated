@@ -1,0 +1,8 @@
+FROM continuumio/miniconda3:latest
+
+WORKDIR /sd
+
+RUN git clone https://github.com/CompVis/stable-diffusion.git /sd
+RUN conda env create -f environment.yaml
+
+ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "ldm", "python", "scripts/txt2img.py", "--H", "512", "--W", "512", "--seed", "27", "--n_iter", "2", "--ddim_steps", "50", "--outdir", "/output", "--prompt"]

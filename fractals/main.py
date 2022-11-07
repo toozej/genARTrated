@@ -20,12 +20,12 @@ newton = subprocess.run(
         "--output",
         newton_filename,
     ],
-    #stdout=subprocess.DEVNULL,
-    #stderr=subprocess.DEVNULL,
+    # stdout=subprocess.DEVNULL,
+    # stderr=subprocess.DEVNULL,
     capture_output=True,
 )
-#print(str(newton.stdout))
-#print(str(newton.stderr))
+# print(str(newton.stdout))
+# print(str(newton.stderr))
 
 # Burning Ship fractal algorithm
 # <https://en.wikipedia.org/wiki/Burning_Ship_fractal>
@@ -48,9 +48,9 @@ burningship = subprocess.run(
         "--output",
         burningship_filename,
     ],
-    #stdout=subprocess.DEVNULL,
-    #stderr=subprocess.DEVNULL,
+    # stdout=subprocess.DEVNULL,
+    # stderr=subprocess.DEVNULL,
     capture_output=True,
 )
-#print(str(burningship.stdout))
-#print(str(burningship.stderr))
+# print(str(burningship.stdout))
+# print(str(burningship.stderr))

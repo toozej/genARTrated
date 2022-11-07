@@ -1,48 +1,58 @@
-.PHONY: all build run project-build project-run project-copy project copy gallery-compile gallery-view gallery load clean $(PROJECTS)
+# Assuming each subdirectory `foobar` containing a Dockerfile
+# is where we `docker build` the image `foobar` 
+PROJECTS  := $(patsubst %/,%,$(dir $(wildcard */Dockerfile)))
 
-# All projects have a Dockerfile, so create a list of project dirs based on dirs containing a Dockerfile
-# idea from https://philpep.org/blog/a-makefile-for-your-dockerfiles/
-DOCKERFILES = $(shell find * -type f -name Dockerfile)
-PROJECTS = $(subst /Dockerfile,,$(DOCKERFILES)) 
-
-# Steps make extensive use of strip function to remove trailing whitespace on variables in $(PROJECTS) list
-# See https://unix.stackexchange.com/a/271818
-
-# If the first argument is "project"...
-ifeq (project,$(firstword $(MAKECMDGOALS)))
-  # use the rest as arguments for "project"
-  PROJECT_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
-  # ...and turn them into do-nothing targets
-  $(eval $(PROJECT_ARGS):;@:)
-endif
-# Idea from https://stackoverflow.com/a/14061796
+# use the rest as arguments for "project"
+define fetch_parameter
+    $(eval target_name:= $(firstword $(MAKECMDGOALS)))
+    $(eval varname := $(target_name)_value)
+    $(eval $(varname) := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS)))
+    $(eval $($(varname))::;@:)
+endef
 
 
-all: $(PROJECTS) build run copy gallery
+init_%:
+	@echo -e "\nInitializing $*"
+	mkdir $(CURDIR)/$*/out
+	chmod 0777 $(CURDIR)/$*/out
 
-build:
-	docker build -f $(CURDIR)/$(strip $(PROJECTS))/Dockerfile -t toozej/genartrated:$(strip $(PROJECTS)) $(strip $(PROJECTS))/ 
+build_%:
+	@echo -e "\nBuilding $*"
+	docker build -f $(CURDIR)/$*/Dockerfile -t toozej/genartrated:$* $(CURDIR)/$*
 
-run: 
-	docker run --rm --name $(strip $(PROJECTS)) -v $(CURDIR)/$(strip $(PROJECTS))/out:/out toozej/genartrated:$(strip $(PROJECTS))
+run_%:
+	@echo -e "\nRunning $*"
+	docker run --rm --name $* -v $(CURDIR)/$*/out:/out toozej/genartrated:$*
 
-project-build:
-	docker build -f $(CURDIR)/$(strip $(PROJECT_ARGS))/Dockerfile -t toozej/genartrated:$(strip $(PROJECT_ARGS)) $(strip $(PROJECT_ARGS))/
+copy_%:
+	@echo -e "\nCopying $*"
+	mkdir -p $(CURDIR)/docs/photos/$*
+	cp -r $(CURDIR)/$*/out/* $(CURDIR)/docs/photos/$*/
+	chmod -R ugo+rw $(CURDIR)/docs/photos/$*/
 
-project-run:
-	docker run --rm --name $(strip $(PROJECT_ARGS)) -v $(CURDIR)/$(strip $(PROJECT_ARGS))/out:/out toozej/genartrated:$(strip $(PROJECT_ARGS))
+clean_%:
+	@echo -e "\nCleaning $*"
+	rm -f $(CURDIR)/$*/out/*
+	docker image rm toozej/genartrated:$*
 
-project-copy:
-	mkdir -p $(CURDIR)/docs/photos/$(strip $(PROJECT_ARGS))
-	cp -r $(CURDIR)/$(strip $(PROJECT_ARGS))/out/* $(CURDIR)/docs/photos/$(strip $(PROJECT_ARGS))/
-	chmod -R ugo+rw $(CURDIR)/docs/photos/$(strip $(PROJECT_ARGS))/
+.PHONY: all init build run copy project gallery-compile gallery-view gallery load clean $(PROJECTS)
 
-project: project-build project-run project-copy
+all: build run copy gallery
 
-copy:
-	mkdir -p $(CURDIR)/docs/photos/$(strip $(PROJECTS))
-	cp -r $(CURDIR)/$(strip $(PROJECTS))/out/* $(CURDIR)/docs/photos/$(strip $(PROJECTS))/
-	chmod -R ugo+rw $(CURDIR)/docs/photos/$(strip $(PROJECTS))/
+init: clean $(addprefix init_,$(PROJECTS))
+
+build: $(addprefix build_,$(PROJECTS))
+
+run: $(addprefix run_,$(PROJECTS))
+
+copy: $(addprefix copy_,$(PROJECTS))
+
+project: res := $(call fetch_parameter)
+project:
+	@echo -e "\nWorking on project $($@_value)"
+	$(addprefix build_,$($@_value))
+	$(addprefix run_, $($@_value))
+	$(addprefix copy_,$($@_value))
 
 gallery-compile:
 	docker build -f $(CURDIR)/docs/Dockerfile-compile -t toozej/genartrated:gallery-compile docs/
@@ -54,7 +64,6 @@ gallery-view:
 
 gallery: gallery-compile gallery-view
 
-load: $(PROJECTS) copy gallery
+load: copy gallery
 
-clean: 
-	rm -f $(CURDIR)/$(strip $(PROJECTS))/out/*
+clean: $(addprefix clean_,$(PROJECTS))

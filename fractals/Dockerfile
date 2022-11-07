@@ -17,4 +17,4 @@ ENV PATH="/home/appuser/.local/bin:${PATH}"
 
 COPY --chown=appuser:appuser . .
 
-CMD [ "python3", "main.py" ]
+CMD [ "python3", "-u", "main.py" ]

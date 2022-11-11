@@ -2,14 +2,8 @@
 # is where we `docker build` the image `foobar` 
 PROJECTS  := $(patsubst %/,%,$(dir $(wildcard */Dockerfile)))
 
-# use the rest as arguments for "project"
-define fetch_parameter
-    $(eval target_name:= $(firstword $(MAKECMDGOALS)))
-    $(eval varname := $(target_name)_value)
-    $(eval $(varname) := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS)))
-    $(eval $($(varname))::;@:)
-endef
-
+# can also override PROJECTS list with argument to make command like:
+# `make all PROJECTS=fractals` to just run "all" target with only fractals project
 
 init_%:
 	@echo -e "\nInitializing $*"
@@ -35,7 +29,7 @@ clean_%:
 	rm -f $(CURDIR)/$*/out/*
 	docker image rm toozej/genartrated:$*
 
-.PHONY: all init build run copy project gallery-compile gallery-view gallery load clean $(PROJECTS)
+.PHONY: all init build run copy gallery-compile gallery-view gallery load clean
 
 all: build run copy gallery
 
@@ -46,13 +40,6 @@ build: $(addprefix build_,$(PROJECTS))
 run: $(addprefix run_,$(PROJECTS))
 
 copy: $(addprefix copy_,$(PROJECTS))
-
-project: res := $(call fetch_parameter)
-project:
-	@echo -e "\nWorking on project $($@_value)"
-	$(addprefix build_,$($@_value))
-	$(addprefix run_, $($@_value))
-	$(addprefix copy_,$($@_value))
 
 gallery-compile:
 	docker build -f $(CURDIR)/docs/Dockerfile-compile -t toozej/genartrated:gallery-compile docs/

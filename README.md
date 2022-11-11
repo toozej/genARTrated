@@ -10,7 +10,7 @@ Run all projects with `make all`
 ## Execution
 ### Make
 - Make all projects: `make all`
-- Make a specific project $proj: `make project $proj`
+- Make a specific project $proj: `make all PROJECTS=$proj`
 - Make the web gallery: `make gallery`
 
 ### Docker
@@ -29,6 +29,11 @@ and install the necessary requirements before running!
 ## Projects
 ### Samila
 Art in this directory is generated using <https://github.com/sepandhaghighi/samila>
+- See [the Samila README](./samila/README.md) for more information
+
+### Fractals
+Art in this directory is generated using <https://github.com/anovik/fractals>. 
+- See [the fractals README](./fractals/README.md) for more information
 
 ## Gallery
 - Stored in genARTrated repo as `docs/` since GitHub Pages will only publish from root or `docs/` directories :(

@@ -1,0 +1,15 @@
+FROM node:current-alpine
+
+WORKDIR /usr/app
+
+RUN \
+npm config set user 0 \
+npm config set unsafe-perm true
+
+ENV NPM_CONFIG_UPDATE_NOTIFIER=false
+
+RUN npm install -g -D doctoc@v2.2.0
+
+WORKDIR /data
+
+ENTRYPOINT ["npx", "doctoc", "--maxlevel", "3"]

@@ -5,6 +5,8 @@ PROJECTS  := $(patsubst %/,%,$(dir $(wildcard */Dockerfile)))
 # can also override PROJECTS list with argument to make command like:
 # `make all PROJECTS=fractals` to just run "all" target with only fractals project
 
+MARKDOWNS := $(shell find * -type f -name "README.md")
+
 init_%:
 	@echo -e "\nInitializing $*"
 	mkdir $(CURDIR)/$*/out
@@ -29,7 +31,7 @@ clean_%:
 	rm -f $(CURDIR)/$*/out/*
 	docker image rm toozej/genartrated:$*
 
-.PHONY: all init build run copy gallery-compile gallery-view gallery load clean
+.PHONY: all init build run copy gallery-compile gallery-view gallery load generate-toc-build generate-toc-run generate-toc clean
 
 all: build run copy gallery
 
@@ -52,5 +54,16 @@ gallery-view:
 gallery: gallery-compile gallery-view
 
 load: copy gallery
+
+generate-toc-build:
+	docker build -f $(CURDIR)/tools/Dockerfile-tocgen -t toozej/tocgen:latest tools/
+
+generate-toc-run:
+	for md in $(MARKDOWNS); do \
+		echo -e "Generating markdown table-of-contents for $${md}\n"; \
+		docker run --rm --name tocgen -v $(CURDIR):/data --user $(shell id -u):$(shell id -g) toozej/tocgen:latest /data/$${md}; \
+	done
+
+generate-toc: generate-toc-build generate-toc-run
 
 clean: $(addprefix clean_,$(PROJECTS))

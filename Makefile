@@ -37,6 +37,8 @@ copy_%:
 clean_%:
 	@echo -e "\nCleaning $*"
 	rm -f $(CURDIR)/$*/out/*
+	git checkout -- docs/_data/*
+	git clean -f -d
 	docker image rm toozej/genartrated:$*
 
 .PHONY: all init build run copy gallery-compile gallery-view gallery load generate-toc-build generate-toc-run generate-toc pre-commit pre-commit-install pre-commit-run clean help
